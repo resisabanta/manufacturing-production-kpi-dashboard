@@ -1,0 +1,6 @@
+material_id,task_id,material_name,planned_qty,used_qty,waste_qty
+M001,T003,Wall panel,10,11,1
+M002,T005,Cable set,5,6,1
+M003,T011,Seat set,8,8,0
+M004,T010,Absorber unit,2,2,0
+M005,T013,Bellows kit,1,1,0

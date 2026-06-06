@@ -1,0 +1,31 @@
+worker_id,worker_name,nationality,team,skill_level,experience_years,supervisor_id
+W001,Ega Pratama,Indonesia,Interior,Senior,3,S001
+W002,Agus Santoso,Indonesia,Doors,Mid,2,S004
+W003,Martin Novak,Czech,Mechanical,Senior,8,S003
+W004,Petr Svoboda,Czech,Insulation,Senior,10,S005
+W005,Shamel Reyes,Philippines,Interior,Mid,4,S001
+W006,Jose Santos,Philippines,Electrical,Mid,3,S002
+W007,Yurii Shevchenko,Ukraine,Mechanical,Junior,1,S003
+W008,Milan Dvorak,Czech,Doors,Senior,12,S004
+W009,Radek Prochazka,Czech,Exterior,Mid,5,S006
+W010,Budi Hartono,Indonesia,Mechanical,Junior,1,S003
+W011,Andi Saputra,Indonesia,Interior,Mid,2,S001
+W012,Rizky Maulana,Indonesia,Electrical,Junior,1,S002
+W013,Hendra Wijaya,Indonesia,Doors,Senior,6,S004
+W014,Tomas Horak,Czech,Mechanical,Mid,4,S003
+W015,Lukas Vesely,Czech,Exterior,Senior,9,S006
+W016,Jan Kral,Czech,Electrical,Mid,5,S002
+W017,David Cerny,Czech,Insulation,Junior,2,S005
+W018,Marek Urban,Czech,Interior,Senior,7,S001
+W019,Oleksii Bondarenko,Ukraine,Mechanical,Mid,3,S003
+W020,Dmytro Kovalenko,Ukraine,Exterior,Junior,1,S006
+W021,Serhii Melnyk,Ukraine,Doors,Mid,4,S004
+W022,Volodymyr Tkachenko,Ukraine,Electrical,Senior,8,S002
+W023,Carlos Mendoza,Philippines,Interior,Junior,1,S001
+W024,Mark Anthony Cruz,Philippines,Mechanical,Mid,5,S003
+W025,John Paul Garcia,Philippines,Doors,Senior,7,S004
+W026,Michael Ramos,Philippines,Exterior,Mid,4,S006
+W027,Fajar Nugroho,Indonesia,Insulation,Junior,2,S005
+W028,Deni Kurniawan,Indonesia,Mechanical,Mid,3,S003
+W029,Vaclav Benes,Czech,Electrical,Senior,11,S002
+W030,Filip Marek,Czech,Interior,Mid,5,S001

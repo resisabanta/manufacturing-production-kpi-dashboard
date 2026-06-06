@@ -1,0 +1,16 @@
+task_id,tram_type,module,item_name,item_id,category,planned_hours,priority
+T001,52T Praha,MT05_A,Double-leaf doors,DO679316,Doors,3.0,High
+T002,52T Praha,MT05_A,End wall cover,DO679316,Interior,0.4,High
+T003,52T Praha,MT05_A,Side wall lining,DO679696,Interior,12.0,Medium
+T004,52T Praha,MT05_A,Interior lighting prep,DO678163,Electrical,7.8,Medium
+T005,52T Praha,MT05_A,Interior lighting install,DO678163,Electrical,10.3,High
+T006,52T Praha,MT02_A,Carbody insulation side wall,DO678166,Insulation,10.3,High
+T007,52T Praha,MT02_A,Roof insulation,TE007491,Insulation,8.7,High
+T008,52T Praha,MT02_A,Rail head lubrication,DO678200,Mechanical,11.0,Low
+T009,52T Praha,MT04_A,Emergency coupler,DO678205,Mechanical,2.0,High
+T010,52T Praha,MT04_A,Bumper with absorbers,DO678189,Mechanical,3.1,High
+T011,52T Praha,MT04_A,Seats install,TE007420,Interior,1.2,Medium
+T012,52T Praha,MT04_A,Roof covers,TE007555,Exterior,2.7,Low
+T013,52T Praha,MT04_A,Bellows install,TE007561,Mechanical,4.3,Medium
+T014,52T Praha,MT02_A,Driver desk panels,TE008176,Interior,1.1,Medium
+T015,52T Praha,MT02_A,Sealing strips door set A,TE007473,Doors,1.3,High

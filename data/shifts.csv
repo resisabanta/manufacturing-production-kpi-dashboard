@@ -1,0 +1,6 @@
+shift_id,date,shift_type,planned_workers,actual_workers,supervisor
+S001,2026-04-01,Day,8,8,Foreman Novak
+S002,2026-04-01,Night,5,4,Foreman Karel
+S003,2026-04-02,Day,8,7,Foreman Novak
+S004,2026-04-02,Night,5,5,Foreman Karel
+S005,2026-04-03,Day,8,8,Foreman Novak

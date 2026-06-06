@@ -1,0 +1,6 @@
+issue_id,task_id,issue_type,severity,description
+I001,T001,Door alignment,High,Rework due to misaligned hinges
+I002,T003,Material delay,Medium,Panels arrived late from supplier
+I003,T005,Cable shortage,High,Electrical cable missing
+I004,T008,Tool downtime,Low,Lubrication tool unavailable 20 min
+I005,T013,Training issue,Medium,Junior worker needed assistance
