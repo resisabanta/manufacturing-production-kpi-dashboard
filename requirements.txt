@@ -1,5 +1,3 @@
-pandas
-sqlalchemy
-psycopg2-binary
-openpyxl
-matplotlib
+pandas>=2.2,<3
+SQLAlchemy>=2.0,<3
+psycopg2-binary>=2.9,<3

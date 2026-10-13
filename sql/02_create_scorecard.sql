@@ -1,4 +1,4 @@
-/*CREATE OR REPLACE VIEW vw_tram_scorecard AS*/
+CREATE OR REPLACE VIEW vw_tram_scorecard AS
 
 WITH base AS (
 

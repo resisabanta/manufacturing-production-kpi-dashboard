@@ -1,4 +1,4 @@
-/*CREATE OR REPLACE VIEW vw_tram_kpi AS*/
+CREATE OR REPLACE VIEW vw_tram_kpi AS
 WITH source AS (
 
 SELECT
