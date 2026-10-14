@@ -1,0 +1,21 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-ID
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["vw_tram_kpi","vw_tram_scorecard"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table vw_tram_kpi
+ref table DateTableTemplate_beb21f84-bba9-49e7-ace5-fa1a19b6941b
+ref table LocalDateTable_7c0e6fdf-cab7-4e9e-8512-0982403a827d
+ref table LocalDateTable_9469e021-5b8f-4902-aefa-0307f04df787
+ref table vw_tram_scorecard
+
+ref cultureInfo en-US

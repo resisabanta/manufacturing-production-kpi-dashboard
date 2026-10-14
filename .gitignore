@@ -16,3 +16,6 @@ __pycache__/
 .pytest_cache/
 .env.*
 !.env.example
+
+# Local Power BI cache and user settings
+**/.pbi/
