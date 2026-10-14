@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "tram_project"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "e8deabca-f42f-4ec7-9e00-453ae0c3de60"
+  }
+}

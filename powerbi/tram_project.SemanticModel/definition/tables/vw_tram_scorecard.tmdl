@@ -1,0 +1,114 @@
+table vw_tram_scorecard
+	lineageTag: ae2480c3-4c77-4e6b-b38f-a8b89d86ff82
+
+	column team
+		dataType: string
+		lineageTag: c20706b4-77ff-47da-81f0-03067c56b642
+		summarizeBy: none
+		sourceColumn: team
+
+		annotation SummarizationSetBy = Automatic
+
+	column supervisor_name
+		dataType: string
+		lineageTag: 7b5be459-4fc8-4aa5-899e-ed29e3dc05e9
+		summarizeBy: none
+		sourceColumn: supervisor_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_jobs
+		dataType: int64
+		formatString: 0
+		lineageTag: e24db2a7-60df-4b2c-9410-639787a63a2b
+		summarizeBy: none
+		sourceColumn: total_jobs
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_score
+		dataType: double
+		lineageTag: 136ab600-ae2e-494b-95b2-8f491a733219
+		summarizeBy: none
+		sourceColumn: avg_score
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_efficiency
+		dataType: double
+		lineageTag: fe9c6e3a-2512-4ebb-9cb9-367e28a70a8d
+		summarizeBy: none
+		sourceColumn: avg_efficiency
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_quality
+		dataType: double
+		lineageTag: 3b781807-ffe7-45a6-bd07-babbe179f18f
+		summarizeBy: none
+		sourceColumn: avg_quality
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column rework_jobs
+		dataType: int64
+		formatString: 0
+		lineageTag: d3950399-050e-4fb5-9319-dee42e806170
+		summarizeBy: none
+		sourceColumn: rework_jobs
+
+		annotation SummarizationSetBy = Automatic
+
+	column fail_jobs
+		dataType: int64
+		formatString: 0
+		lineageTag: 54fb8988-0d0a-4e2f-b6de-1d7625cd7c99
+		summarizeBy: none
+		sourceColumn: fail_jobs
+
+		annotation SummarizationSetBy = Automatic
+
+	column rework_rate
+		dataType: double
+		lineageTag: b7762597-f7df-4a6e-85df-5af5ce1fc824
+		summarizeBy: none
+		sourceColumn: rework_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column fail_rate
+		dataType: double
+		lineageTag: fe84babc-fa8f-4f76-86ce-3935b510a9ad
+		summarizeBy: none
+		sourceColumn: fail_rate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column overall_status
+		dataType: string
+		lineageTag: b3093af5-fb58-4729-af8c-6c5a41fb071d
+		summarizeBy: none
+		sourceColumn: overall_status
+
+		annotation SummarizationSetBy = Automatic
+
+	partition vw_tram_scorecard = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "tram_project"),
+				    public_vw_tram_scorecard = Source{[Schema="public",Item="vw_tram_scorecard"]}[Data]
+				in
+				    public_vw_tram_scorecard
+
+	annotation PBI_ResultType = Table

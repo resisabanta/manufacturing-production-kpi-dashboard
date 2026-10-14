@@ -1,0 +1,395 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.9.0/schema.json",
+  "name": "df5a9d5afcf742ab8eb6",
+  "position": {
+    "x": 640,
+    "y": 374,
+    "z": 43,
+    "height": 500,
+    "width": 936,
+    "tabOrder": 43
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "vw_tram_kpi"
+                    }
+                  },
+                  "Property": "item_name"
+                }
+              },
+              "queryRef": "vw_tram_kpi.item_name",
+              "nativeQueryRef": "item_name",
+              "displayName": "Task"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "vw_tram_kpi"
+                    }
+                  },
+                  "Property": "Total Jobs"
+                }
+              },
+              "queryRef": "vw_tram_kpi.Total Jobs",
+              "nativeQueryRef": "Total Jobs",
+              "displayName": "Jobs"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "vw_tram_kpi"
+                    }
+                  },
+                  "Property": "Planned Hours"
+                }
+              },
+              "queryRef": "vw_tram_kpi.Planned Hours",
+              "nativeQueryRef": "Planned Hours",
+              "displayName": "Planned h"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "vw_tram_kpi"
+                    }
+                  },
+                  "Property": "Actual Hours"
+                }
+              },
+              "queryRef": "vw_tram_kpi.Actual Hours",
+              "nativeQueryRef": "Actual Hours",
+              "displayName": "Actual h"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "vw_tram_kpi"
+                    }
+                  },
+                  "Property": "Positive Overrun Hours"
+                }
+              },
+              "queryRef": "vw_tram_kpi.Positive Overrun Hours",
+              "nativeQueryRef": "Positive Overrun Hours",
+              "displayName": "Overrun h"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "vw_tram_kpi"
+                    }
+                  },
+                  "Property": "Rework Jobs"
+                }
+              },
+              "queryRef": "vw_tram_kpi.Rework Jobs",
+              "nativeQueryRef": "Rework Jobs",
+              "displayName": "Rework jobs"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "vw_tram_kpi"
+                    }
+                  },
+                  "Property": "Fail Jobs"
+                }
+              },
+              "queryRef": "vw_tram_kpi.Fail Jobs",
+              "nativeQueryRef": "Fail Jobs",
+              "displayName": "Fail jobs"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "vw_tram_kpi"
+                  }
+                },
+                "Property": "Positive Overrun Hours"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "grid": [
+        {
+          "properties": {
+            "rowPadding": {
+              "expr": {
+                "Literal": {
+                  "Value": "3D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Task evidence \u2022 compare volume, hours and quality'"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#213547'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "13D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "223f4e6af10f0c444d58",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "vw_tram_kpi"
+              }
+            },
+            "Property": "item_name"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "971484abd14950088da5",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "vw_tram_kpi"
+              }
+            },
+            "Property": "Total Jobs"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "22ee97b062ca52f0f759",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "vw_tram_kpi"
+              }
+            },
+            "Property": "Planned Hours"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c01fa5eb43a1f7232691",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "vw_tram_kpi"
+              }
+            },
+            "Property": "Actual Hours"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "25155b66a12dfc73932b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "vw_tram_kpi"
+              }
+            },
+            "Property": "Positive Overrun Hours"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "dc50d16752d073b35725",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "vw_tram_kpi"
+              }
+            },
+            "Property": "Rework Jobs"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2da5ce1e9fa0a7e5eb27",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "vw_tram_kpi"
+              }
+            },
+            "Property": "Fail Jobs"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

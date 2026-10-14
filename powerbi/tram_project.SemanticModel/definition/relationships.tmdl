@@ -1,0 +1,13 @@
+relationship 53cc4ca0-164f-4a9f-a0ee-0e23dca001c3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: vw_tram_kpi.start_time
+	toColumn: LocalDateTable_7c0e6fdf-cab7-4e9e-8512-0982403a827d.Date
+
+relationship d6fad52f-2ecc-4c25-95fe-a9ae693f4939
+	joinOnDateBehavior: datePartOnly
+	fromColumn: vw_tram_kpi.end_time
+	toColumn: LocalDateTable_9469e021-5b8f-4902-aefa-0307f04df787.Date
+
+relationship AutoDetected_dbc6aab0-4c24-48ab-9f98-ee8d01076bb2
+	fromColumn: vw_tram_kpi.supervisor_name
+	toColumn: vw_tram_scorecard.supervisor_name

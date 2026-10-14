@@ -1,0 +1,386 @@
+table vw_tram_kpi
+	lineageTag: cc91fd1c-705d-4243-873a-92089f3d4104
+
+	measure 'Total Jobs' = COALESCE(COUNTROWS('vw_tram_kpi'), 0)
+		formatString: #,0
+		displayFolder: Dashboard
+		lineageTag: dc72781f-8fca-4cf9-98d1-74fdff55ebdd
+
+
+	measure 'Average Excess %' = AVERAGE('vw_tram_kpi'[excess_percent])/100
+		lineageTag: 1962cf87-a536-4776-ae5a-8fe4c263b97e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Total Excess Hours' = [Actual Hours] - [Planned Hours]
+		formatString: #,0.0
+		displayFolder: Dashboard
+		lineageTag: 9d268743-c5e4-4ed5-94c6-66150474da68
+
+
+	measure 'Total Overtime Hours' = SUM('vw_tram_kpi'[overtime_hours])
+		formatString: #,0.0
+		displayFolder: Dashboard
+		lineageTag: 8a56ec48-1372-4f41-99e6-d50042a9baa2
+
+
+	measure 'Rework Jobs' = COALESCE(CALCULATE(COUNTROWS('vw_tram_kpi'), KEEPFILTERS('vw_tram_kpi'[work_quality] = "REWORK")), 0)
+		formatString: #,0
+		displayFolder: Dashboard
+		lineageTag: 8dd325ce-b37f-436d-98a7-ed7f0249b381
+
+
+	measure 'Rework Rate' = DIVIDE([Rework Jobs], [Total Jobs])
+		formatString: 0.0%
+		displayFolder: Dashboard
+		lineageTag: 39ea46b5-b5c8-4044-bd05-e0e346fde37f
+
+
+	measure 'Fail Jobs' = COALESCE(CALCULATE(COUNTROWS('vw_tram_kpi'), KEEPFILTERS('vw_tram_kpi'[work_quality] = "FAIL")), 0)
+		formatString: #,0
+		displayFolder: Dashboard
+		lineageTag: 3bd1832a-bcc9-4e50-9662-24f4dbb2185b
+
+
+	measure 'Fail Rate' = DIVIDE([Fail Jobs], [Total Jobs])
+		formatString: 0.0%
+		displayFolder: Dashboard
+		lineageTag: b1bb7de2-688b-4216-808c-f03d573370f9
+
+
+	measure 'Critical Jobs' = COALESCE(CALCULATE(COUNTROWS('vw_tram_kpi'), KEEPFILTERS('vw_tram_kpi'[kpi_status] = "CRITICAL")), 0)
+		formatString: #,0
+		displayFolder: Dashboard
+		lineageTag: 0d34b8c3-fdb1-439f-9792-79622e378ad8
+
+
+	measure 'Pass Rate' = DIVIDE([Pass Jobs], [Total Jobs])
+		formatString: 0.0%
+		displayFolder: Dashboard
+		lineageTag: 1ba47c34-711d-4b20-8611-4be543846b00
+
+
+	measure 'Average Efficiency %' = AVERAGEX('vw_tram_kpi', DIVIDE('vw_tram_kpi'[planned_hours], 'vw_tram_kpi'[actual_hours]))
+		formatString: 0.0%
+		displayFolder: Dashboard
+		lineageTag: 4499fb17-d98a-46ad-b1a8-c6307bdb3d0a
+
+
+	measure 'Planned Hours' = SUM('vw_tram_kpi'[planned_hours])
+		formatString: #,0.0
+		displayFolder: Dashboard
+		lineageTag: 64e770f2-a9b5-44cf-a42d-587df52a31fc
+
+	measure 'Actual Hours' = SUM('vw_tram_kpi'[actual_hours])
+		formatString: #,0.0
+		displayFolder: Dashboard
+		lineageTag: 5ef91ed7-70c6-49a6-ba79-e7a27926175e
+
+	measure 'Overall Efficiency' = DIVIDE([Planned Hours], [Actual Hours])
+		formatString: 0.0%
+		displayFolder: Dashboard
+		lineageTag: afa344ad-70c0-4b42-9dc7-5b183f62f623
+
+	measure 'Positive Overrun Hours' = SUMX('vw_tram_kpi', MAX('vw_tram_kpi'[actual_hours] - 'vw_tram_kpi'[planned_hours], 0))
+		formatString: #,0.0
+		displayFolder: Dashboard
+		lineageTag: 2867489e-9b43-48ea-ac69-5229ebf116de
+
+	measure 'Pass Jobs' = COALESCE(CALCULATE(COUNTROWS('vw_tram_kpi'), KEEPFILTERS('vw_tram_kpi'[work_quality] = "PASS")), 0)
+		formatString: #,0
+		displayFolder: Dashboard
+		lineageTag: 97f68268-a62f-4a3c-8e22-8e9af4fff5bd
+
+	measure 'Selection Summary' = IF([Total Jobs] = 0, "No records match the current filters.", FORMAT([Total Jobs], "#,0") & " jobs selected | " & FORMAT([Planned Hours], "#,0.0") & " planned h | " & FORMAT([Actual Hours], "#,0.0") & " actual h")
+		displayFolder: Dashboard
+		lineageTag: efcf5d46-59dc-430b-a588-ce638f309f42
+
+	measure 'Priority Task' = VAR Ranked = TOPN(1, ADDCOLUMNS(VALUES('vw_tram_kpi'[item_name]), "Impact", [Positive Overrun Hours]), [Impact], DESC, 'vw_tram_kpi'[item_name], ASC) RETURN IF([Total Jobs] = 0, "No records selected", IF([Positive Overrun Hours] <= 0, "No positive overruns in this selection", "Largest overrun impact: " & CONCATENATEX(Ranked, 'vw_tram_kpi'[item_name] & " | " & FORMAT([Impact], "#,0.0") & " h", ", ")))
+		displayFolder: Dashboard
+		lineageTag: 30f2d9f7-f81a-49da-ba67-8693fff654cf
+
+	measure 'Warning Jobs' = COALESCE(CALCULATE(COUNTROWS('vw_tram_kpi'), KEEPFILTERS('vw_tram_kpi'[work_quality] = "WARNING")), 0)
+		formatString: #,0
+		displayFolder: Dashboard
+		lineageTag: cfab3316-93ac-40a3-acaf-02ef4398e975
+
+	measure 'Warning Rate' = DIVIDE([Warning Jobs], [Total Jobs])
+		formatString: 0.0%
+		displayFolder: Dashboard
+		lineageTag: 94f4cf93-8fcc-4c7c-899e-6b4ce8fd7555
+
+	column 'Reporting Month' = FORMAT('vw_tram_kpi'[start_time], "yyyy-MM")
+		dataType: string
+		summarizeBy: none
+		lineageTag: 0e5aeb1b-510a-43b3-81fb-aea00463e017
+
+	column task_id
+		dataType: string
+		lineageTag: 1da414c4-79df-4f61-882f-1626aad36ed9
+		summarizeBy: none
+		sourceColumn: task_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column item_name
+		dataType: string
+		lineageTag: 2cfc097d-be86-4808-a777-81e49696af2b
+		summarizeBy: none
+		sourceColumn: item_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column module
+		dataType: string
+		lineageTag: 5f861632-3f1f-48b3-88c6-c06f0a2cb7b1
+		summarizeBy: none
+		sourceColumn: module
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: 511bc7be-fb20-4a0c-bda8-bd947a3faddb
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column worker_name
+		dataType: string
+		lineageTag: f7065e20-72ad-4db3-9cb8-6c94795e5e34
+		summarizeBy: none
+		sourceColumn: worker_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column supervisor_name
+		dataType: string
+		lineageTag: 2a7bd001-d509-4c4b-81c6-8202b7ea4bbb
+		summarizeBy: none
+		sourceColumn: supervisor_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column team
+		dataType: string
+		lineageTag: 3fdb98b3-2897-4b36-9e65-3a4867140506
+		summarizeBy: none
+		sourceColumn: team
+
+		annotation SummarizationSetBy = Automatic
+
+	column skill_level
+		dataType: string
+		lineageTag: b56bf828-8269-4e44-938d-fdd9defbad77
+		summarizeBy: none
+		sourceColumn: skill_level
+
+		annotation SummarizationSetBy = Automatic
+
+	column tram_unit
+		dataType: string
+		lineageTag: a21f46c0-4891-4ad3-8f72-d8d1461653df
+		summarizeBy: none
+		sourceColumn: tram_unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column start_time
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 5b07c256-9287-48d9-bbac-08e5a0810bd8
+		summarizeBy: none
+		sourceColumn: start_time
+
+		variation Variation
+			isDefault
+			relationship: 53cc4ca0-164f-4a9f-a0ee-0e23dca001c3
+			defaultHierarchy: LocalDateTable_7c0e6fdf-cab7-4e9e-8512-0982403a827d.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column end_time
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: e096aefa-7564-4f81-b152-50e3a272183b
+		summarizeBy: none
+		sourceColumn: end_time
+
+		variation Variation
+			isDefault
+			relationship: d6fad52f-2ecc-4c25-95fe-a9ae693f4939
+			defaultHierarchy: LocalDateTable_9469e021-5b8f-4902-aefa-0307f04df787.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+	column planned_hours
+		dataType: double
+		lineageTag: c23e5250-8a65-4626-b7d8-9bc56a773a51
+		summarizeBy: sum
+		sourceColumn: planned_hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column actual_hours
+		dataType: double
+		lineageTag: e64917c0-8776-4520-be6e-473601ceb914
+		summarizeBy: sum
+		sourceColumn: actual_hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column excess_time
+		dataType: double
+		lineageTag: b52e561f-58fa-417f-8527-c1d9880aab98
+		summarizeBy: average
+		sourceColumn: excess_time
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column overtime_hours
+		dataType: double
+		lineageTag: b58ac753-a881-4d7d-81e5-106abdde24df
+		summarizeBy: sum
+		sourceColumn: overtime_hours
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column kpi_status
+		dataType: string
+		lineageTag: e446d104-5ea1-4deb-992b-f800e5a1897c
+		summarizeBy: none
+		sourceColumn: kpi_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column used_overtime
+		dataType: string
+		lineageTag: 771c5418-2ee5-43aa-826f-d4aee69e1b36
+		summarizeBy: none
+		sourceColumn: used_overtime
+
+		annotation SummarizationSetBy = Automatic
+
+	column work_quality
+		dataType: string
+		lineageTag: 7d50090b-e0a4-48aa-8227-83a25840c86b
+		summarizeBy: none
+		sourceColumn: work_quality
+
+		annotation SummarizationSetBy = Automatic
+
+	column performance_conclusion =
+
+			SWITCH(
+			    TRUE(),
+
+			    vw_tram_kpi[kpi_status] = "GOOD"
+			        && vw_tram_kpi[work_quality] = "PASS",
+			    "OPTIMAL PERFORMANCE",
+
+			    vw_tram_kpi[kpi_status] = "GOOD"
+			        && vw_tram_kpi[work_quality] = "WARNING",
+			    "FAST BUT QUALITY ISSUE",
+
+			    vw_tram_kpi[kpi_status] = "GOOD"
+			        && vw_tram_kpi[work_quality] = "REWORK",
+			    "FAST BUT REWORK REQUIRED",
+
+			    vw_tram_kpi[kpi_status] = "GOOD"
+			        && vw_tram_kpi[work_quality] = "FAIL",
+			    "HIGH SPEED QUALITY FAILURE",
+
+			    vw_tram_kpi[kpi_status] = "NORMAL"
+			        && vw_tram_kpi[work_quality] = "PASS",
+			    "STABLE PERFORMANCE",
+
+			    vw_tram_kpi[kpi_status] = "NORMAL"
+			        && vw_tram_kpi[work_quality] = "WARNING",
+			    "MINOR QUALITY ISSUE",
+
+			    vw_tram_kpi[kpi_status] = "NORMAL"
+			        && vw_tram_kpi[work_quality] = "REWORK",
+			    "REWORK TREND DETECTED",
+
+			    vw_tram_kpi[kpi_status] = "NORMAL"
+			        && vw_tram_kpi[work_quality] = "FAIL",
+			    "QUALITY PROBLEM",
+
+			    vw_tram_kpi[kpi_status] = "WARNING"
+			        && vw_tram_kpi[work_quality] = "PASS",
+			    "SLOW BUT ACCEPTABLE",
+
+			    vw_tram_kpi[kpi_status] = "WARNING"
+			        && vw_tram_kpi[work_quality] = "WARNING",
+			    "INEFFICIENT PROCESS",
+
+			    vw_tram_kpi[kpi_status] = "WARNING"
+			        && vw_tram_kpi[work_quality] = "REWORK",
+			    "HIGH REWORK RISK",
+
+			    vw_tram_kpi[kpi_status] = "WARNING"
+			        && vw_tram_kpi[work_quality] = "FAIL",
+			    "SERIOUS ISSUE",
+
+			    vw_tram_kpi[kpi_status] = "CRITICAL"
+			        && vw_tram_kpi[work_quality] = "PASS",
+			    "VERY SLOW BUT QUALITY OK",
+
+			    vw_tram_kpi[kpi_status] = "CRITICAL"
+			        && vw_tram_kpi[work_quality] = "WARNING",
+			    "HIGH RISK OPERATION",
+
+			    vw_tram_kpi[kpi_status] = "CRITICAL"
+			        && vw_tram_kpi[work_quality] = "REWORK",
+			    "CRITICAL REWORK CONDITION",
+
+			    vw_tram_kpi[kpi_status] = "CRITICAL"
+			        && vw_tram_kpi[work_quality] = "FAIL",
+			    "CRITICAL FAILURE",
+
+			    "UNDEFINED"
+			)
+		lineageTag: 2b83eb50-5b4e-4ecb-b968-e5a9663952b5
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column excess_percent
+		dataType: double
+		lineageTag: 52e08d21-8c63-4443-b5c4-91d10a644a9e
+		summarizeBy: average
+		sourceColumn: excess_percent
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Efficiency = [planned_hours]/[actual_hours]*100
+		lineageTag: ce0d7e27-45e6-4da2-ada4-2b06cdb83d55
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition vw_tram_kpi = m
+		mode: import
+		source =
+				let
+				    Source = PostgreSQL.Database("localhost", "tram_project"),
+				    public_vw_tram_kpi = Source{[Schema="public",Item="vw_tram_kpi"]}[Data]
+				in
+				    public_vw_tram_kpi
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation

@@ -6,9 +6,30 @@ A manufacturing analytics portfolio by **Resi Sabanta Belanusa**, built around a
 
 ![Power BI manufacturing dashboard showing efficiency, rework and labor-hour trends](dashboard/dashboard-preview.png)
 
-[View the dashboard PDF](dashboard/tram_project.pdf) · [Download the Power BI file](tram_project.pbix) · [Read the KPI definitions](docs/methodology.md)
+[View the dashboard PDF](dashboard/tram_project.pdf) · [Download the Power BI file](tram_project.pbix) · [Read the KPI definitions](docs/methodology.md) · [Editable Power BI project](powerbi/tram_project.pbip)
 
-> All results below describe the committed synthetic 2025 dataset. They are a portfolio demonstration, not measured results or savings from an employer. The preview is rendered from the existing Power BI PDF; its “overtime” is a per-job simulation proxy and its “excess hours” are net hours, as explained below.
+> All results below describe the committed synthetic 2025 dataset. They are a portfolio demonstration, not measured results or savings from an employer. The previews are rendered from the three-page Power BI export reviewed on 14 October 2026. Overtime is a per-job simulation proxy; positive overruns and net excess hours are shown separately.
+
+## Dashboard pages
+
+| Page | Purpose |
+|---|---|
+| Production Overview | Compare planned/actual hours, weighted efficiency and team overrun impact |
+| Quality & Rework | Compare all four outcomes, monthly rates and task/team counts |
+| Task Investigation | Rank tasks by positive overrun hours and inspect team/unit detail |
+
+Month, team and module slicers are configured to synchronize across pages. Reporting uses the job **start month**. Quality and KPI status filters are local to Task Investigation. Outcome measures respect the current filter selection; rates are blank when no records match.
+
+<details>
+<summary>Quality and investigation previews</summary>
+
+![Quality and rework dashboard](dashboard/quality-rework.png)
+
+![Task investigation dashboard](dashboard/task-investigation.png)
+
+</details>
+
+The PDF shows all 15 tasks in the summary tables. The detailed-record table is interactive and its PDF export only includes visible rows. See [report definitions and validation notes](docs/powerbi-report.md).
 
 ## Results from the committed snapshot
 
@@ -118,7 +139,9 @@ For further questions, run `sql/03_analysis_query.sql` and `sql/04_monthly_perfo
 3. Enter your local database credentials and refresh. If the existing queries specify a database directly, update their Source step in Power Query too.
 4. Check the headline metrics against `sql/05_portfolio_summary.sql`.
 
-The existing `.pbix` is retained; its refresh must be verified in Power BI Desktop. You can inspect the PDF and README preview without installing Power BI.
+The `.pbix` and PDF are the latest user-saved Desktop versions. For source edits, open `powerbi/tram_project.pbip` with both sibling folders intact. Its source still points to `localhost` / `tram_project`; change it to your database before refreshing. Local caches and user settings are excluded from version control.
+
+All 51 editable report JSON definitions passed Microsoft schema checks; visual references and page bounds were checked. Desktop PDF exports confirm the layout and distinct comparison colors. Interactive slicer synchronization and a clean database refresh still need a Desktop check. Clear filters to confirm 5,475 jobs for the committed snapshot.
 
 ## Generate an alternative dataset
 
@@ -165,7 +188,9 @@ GitHub Actions supplies a fresh PostgreSQL database and checks the full load →
 │   ├── 03_analysis_query.sql
 │   ├── 04_monthly_performance.sql
 │   └── 05_portfolio_summary.sql
-├── dashboard/                  # Existing export, preview and original flowchart
+├── dashboard/                  # Three-page PDF, page previews and original flowchart
+├── powerbi/                    # Editable PBIP, PBIR report and TMDL model
+├── docs/powerbi-report.md       # Report behavior and validation notes
 ├── docs/methodology.md         # Data grain, formulas and limitations
 ├── tests/                      # Data and PostgreSQL integration checks
 ├── .github/workflows/validate.yml
